@@ -4,6 +4,7 @@ var controller = require('../controllers/controller.js');
 var userController = require('../controllers/userController.js');
 var userpostsController = require('../controllers/userpostsController.js');
 var commentController = require('../controllers/commentController.js');
+var usercontactController = require('../controllers/usercontactController.js');
 
 //GET route show login page
 router.get('/login',userController.userLoginPage);
@@ -47,6 +48,13 @@ router.get('/loggedin/createpost', userpostsController.showCreatePostPage);
 //POST route for Create new post
 router.post('/loggedin/createpost',userpostsController.createPost);
 
+//GET route to show create contact page
+router.get('/loggedin/createcontact', usercontactController.showCreateContactPage);
+
+//POST route for input new contact info
+router.post('/loggedin/createcontact',usercontactController.createContact);
+
+
 //GET route for show all posts in home page
 router.get('/showpost',controller.showIndex);
 
@@ -57,8 +65,7 @@ router.put('/post/:id/edit', userpostsController.update);//update?
 router.get('/post/:id/edit', controller.showEditPostPage);
 
 //DELETE route to delete post
-router.delete('/post/:id/delete', userpostsController.deletePost);
-
+router.get('/post/:id/delete', userpostsController.deletePost);
 
 //GET route for show ask for organizers page
 router.get('/askexpert',controller.askExpert);

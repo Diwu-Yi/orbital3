@@ -1,28 +1,22 @@
 var mongoose = require('mongoose');
-var Post = mongoose.model('userposts');
+var Contact = mongoose.model('usercontact');
 var User = require('../models/user');
 
 
 //this is a function to create post by logged in user
-var createPost = function(req,res){
+var createContact = function(req,res){
 
     User.findById(req.session.userId)
         .exec(function (error, user) {
-    var post = new Post({
+    var contact = new Contact({
         "title":req.body.title,
         "name":user.username,
-        "postcontent":req.body.postcontent,
-
-        "comment": new comment({
-                        "username" : "123",
-                         "content" : "string",
-                         "created" : Data.now()})
-
+        "content":req.body.content
     });
 
-        post.save(function(err,users){
+        contact.save(function(err,users){
             if(!err){
-                Post.find((err, users) => {
+                Contact.find((err, users) => {
                     if (err) {
                         res.sendStatus(500);
                     } else {
@@ -37,14 +31,14 @@ var createPost = function(req,res){
 };
 
 // enter create post page
-var showCreatePostPage =function(req, res)  {
-    res.render('newpost');
-}
-
-
-var showInputContactPage = function(req, res) {
+var showCreateContactPage =function(req, res)  {
     res.render('newcontact');
 }
+
+
+//var showInputContactPage = function(req, res) {
+//    res.render('newcontact');
+//}
 // Update a post by the id in the request
 /*function(req,res){
 console.log(req.params.id);
@@ -76,42 +70,43 @@ console.log(req.session.userId);
              };*/
 
 
-var update = function(req, res) {
- /* if (!req.body) {
-    return res.status(400).send({
-      message: "Data to update can not be empty!"
-    });
-  }*/
+//var update = function(req, res) {
+// /* if (!req.body) {
+//    return res.status(400).send({
+//      message: "Data to update can not be empty!"
+//    });
+//  }*/
+//
+//      User.findById(req.session.userId)
+//          .exec(function (error, user) {
+//      var post = new Post({
+//          "title":req.body.title,
+//          "name":user.username,
+//          "postcontent":req.body.postcontent,
+//      });
+//
+//
+//  const id = req.params.id;
+//
+//  post.findByIdAndUpdate(id, post, { useFindAndModify: false })
+//    .then(data => {
+//      if (!data) {
+//        res.status(404).send({
+//          message: `Cannot update post with id=${id}. Maybe post was not found!`
+//        });
+//      } else res.send({ message: "Post was updated successfully." });
+//    })
+//    .catch(err => {
+//      res.status(500).send({
+//        message: "Error updating Post with id=" + id
+//      });
+//    });
+//});
+//};
 
-      User.findById(req.session.userId)
-          .exec(function (error, user) {
-      var post = new Post({
-          "title":req.body.title,
-          "name":user.username,
-          "postcontent":req.body.postcontent,
-      });
 
-
-  const id = req.params.id;
-
-  post.findByIdAndUpdate(id, post, { useFindAndModify: false })
-    .then(data => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot update post with id=${id}. Maybe post was not found!`
-        });
-      } else res.send({ message: "Post was updated successfully." });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error updating Post with id=" + id
-      });
-    });
-});
-};
-
-var deletePost = (req, res) => {
-  Post.findByIdAndRemove(req.params.id)
+var deleteContact = (req, res) => {
+  Contact.findByIdAndRemove(req.params.id)
     .then((post) => {
       if (!post) {
         return res.status(404).send({
@@ -127,14 +122,8 @@ var deletePost = (req, res) => {
     });
 };
 
-/*// enter create edit page
-var showEditPostPage =function(req, res)  {
-console.log("cannot find editpost");
-    res.render('editpost');
-}
-*/
-module.exports.createPost = createPost;
-module.exports.showCreatePostPage = showCreatePostPage;
-module.exports.update = update;
-module.exports.deletePost = deletePost;
-//module.exports.showEditPostPage=showEditPostPage;
+
+module.exports.createContact = createContact;
+module.exports.showCreateContactPage = showCreateContactPage;
+//module.exports.update = update;
+module.exports.deleteContact = deleteContact;

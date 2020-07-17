@@ -149,7 +149,7 @@ var getUserPostById = function(req,res){
         Comment.find( function ( err, comments, count ){
             res.render( 'single', {
                 comments : comments,
-                addedpost:users,
+                addedpost : users,
             });
         });
     });

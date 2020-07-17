@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 //copy from CONNECT (MongoDB Atlas)
 const dbURI =
     "mongodb+srv://user:138679@cluster0-eukgq.mongodb.net/test?retryWrites=true&w=majority";
+    //"mongodb+srv://dbUser:607995@mycluster-lki1m.mongodb.net/test?retryWrites=true&w=majority";
 
      //"mongodb+srv://jingsn:88885555@mycluster-mdtkd.mongodb.net/test?retryWrites=true";
 const options = {
@@ -20,3 +21,4 @@ mongoose.connect(dbURI, options).then(
 );
 
 require('./userposts.js');
+require('./usercontact.js');

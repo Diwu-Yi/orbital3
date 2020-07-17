@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var Post = mongoose.model('userposts');
 var User = require('../models/user');
 
+var Contact = mongoose.model('usercontact');
+
 
 //show homepage after logged in
 var LoggedinHomePage = function(req,res){
@@ -49,6 +51,35 @@ var showIndex = function (req,res) {
         });
 }
 
+//render contact page
+var contact= function (req,res) {
+    //res.render('contact');
+    Contact.find((err, users) => {
+            if (err) {
+                res.sendStatus(500);
+            } else {
+                // res.send(users);
+                res.render('contact', {
+                    addedcontact: users,
+                });
+            }
+        });
+}
+
+//Mimicking the index page
+var showContact = function (req,res) {
+        Contact.find((err, users) => {
+            if (err) {
+                res.sendStatus(500);
+            } else {
+                res.render('index', {
+                    addedcontact: users,
+                });
+            }
+        });
+}
+
+
 var showEditPostPage =function(req, res)  {
 Post.find((err, users) => {
             if (err) {
@@ -88,10 +119,6 @@ var postFeedback= function (req,res) {
     res.render('postfeedback');
 }
 
-//render contact page
-var contact= function (req,res) {
-    res.render('contact');
-}
 
 //render promotion page
 var promotion= function (req,res) {
@@ -102,9 +129,6 @@ var promotion= function (req,res) {
 var about= function (req,res) {
     res.render('about');
 }
-
-
-
 
 
 
